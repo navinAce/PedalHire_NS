@@ -1,35 +1,50 @@
 import mongoose ,{ Schema } from 'mongoose';
 
 const bikeSchema=new Schema({
-    owner:{
-        type:mongoose.Types.ObjectId,
-        ref: "User"
+    listerid:{
+        type:String,
+        required:true,
     },
-    bikeinfo:{
-        bikebrand:{
-            type:String,
-            required:true,
-            trim:true
-        },
-        bikemodel:{
-            type:String,
-            required:true
-        },
-        biketype:{
-            type:String,
-            required:true
-        },
-        pricePerDay:{
-            type:Number,
-            required:true
-        },
-        bikepics:{
-            type:[],
-            required:true
-        }
+    bikenamemodel:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    bikenumber:{
+        type:String,
+        required:true
+    },
+    priceperday:{
+        type:String,
+        required:true
+    },
+    priceperweek:{
+        type:String,
+        required:true
+    },
+    bikephoto:{
+        type:String,
+        required:true
+    },
+    yourlocation:{
+        type:String,
+        required:true,
+    },
+    willingtodeliver:{
+        type: Boolean,
+        default: false  
+    },
+    availablefromdate: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
+    availabletodate: {
+        type: Date,
+        required: true
     }
-    
-},{
+}
+,{
     timestamps:true
 })
 

@@ -50,7 +50,7 @@ function Navbar() {
           </a>
         </li>
         <li>
-          <a href="/contact">
+          <a href="/api/v1/users/contact">
             Get In Touch
           </a>
           
@@ -75,14 +75,14 @@ function Navbar() {
         </li>
        
         <li>
-          <a href="/api/v1/user/login">
+          <a href="/api/v1/users/login">
             Log In
           </a>
           
         </li>
   
         <li class="active">
-          <a href="/">
+          <a href="/api/v1/users/list">
              List A Ride
           </a>
         </li>

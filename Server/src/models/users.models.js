@@ -42,27 +42,18 @@ const userSchema=new Schema({
              required:false
         },
         aadhar:{
-            type:Number,
+            type:String,
             required:false,
             default:""
         },
-        bikeslisted: [
-          {
+        bikeslisted:{
             type: mongoose.Types.ObjectId,
             ref: "Bike"
-          }
-        ],
-        bikerented: [
-          {
+          },
+        bikerented:{
             type: mongoose.Types.ObjectId,
             ref: "Rent"
-          }
-        ],
-        description: {
-          type: String,
-          minlength: 1,
-          maxlength: 100
-        }
+          },
       },
     
 },{

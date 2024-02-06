@@ -7,6 +7,7 @@ import Navbar from './navbar'
 import Signup from './signup'
 import Footer from './footer'
 import Contact from "./contact";
+import List from "./list";
 
 function App() {
   return (
@@ -16,9 +17,11 @@ function App() {
     <Routes>
 
       <Route path="/" element={<Home/>} />
-      <Route path="/api/v1/user/login" element={<Login />} />
-      <Route path="/api/v1/user/signup" element={<Signup />} />
-      <Route path="/contact" element={<Contact />}/>
+      <Route path="/api/v1/users/login" element={<Login />} />
+      <Route path="/api/v1/users/register" element={<Signup />} />
+      <Route path="/api/v1/users/contact" element={<Contact />}/>
+      <Route path="/api/v1/users/list" element={<List />}/>
+      
 
     </Routes>
     </BrowserRouter>

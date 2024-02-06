@@ -1,55 +1,116 @@
 
-  @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 
 
-.signup{
-    height: 1100px;
- 
-}
-.background{
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-}
-
-.signup .overlay {
-    background: black;
-    height: 1100px;
+.list {
+    height: 120vh;
     width: 100%;
-    position: absolute;
-    object-fit: cover;
-    z-index: 0;
-    opacity: 0.5;
+    background: #f0f0f0;
+
+}
+
+.list .overlay{
+  height: 120vh;
+}
+
+.list form {
+
+    background-color: white;
+    width: 600px;
+    
 }
 
 
-.signup form {
-    position: absolute;
-    top: 38%;
-    left: 49%;
-    transform: translate(-25%, -22%);
-    width: 65%;
-    z-index: 2;
+.list .form-content{
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  display: flex;
+}
+
+
+.list .main-cont{
+    
+    width: 80%;
+     float:right
+}
+
+.list .side-cont{
+    width: 20%;
+     float:left
+}
+
+
+
+.list h2{
+    color: black;
+    padding-top: 3%;
+    text-align: left;
+    padding-left: 7%;
+}
+
+.list form p {
+    text-align: left;
+    padding-left: 7%;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(242, 18%, 64%);
+}
+
+.list input#drop-date {
+  margin-left: 7%;
+}
+
+
+
+.form-content-2 {
+  background: #d23b46;
+  width: 400px;
+  color: white;
+  text-align: left;
+  padding: 5%;
+}
+
+.fc2-content {
+  padding-bottom: 7%;
+}
+.fc2-content h3 {
+  padding-bottom: 2%;
+  font-size: 22px;
+}
+
+.fc2-content p{
+  font-size: 15px;
 }
 
 
 
 
 
-.signup  a,
+
+.line {
+    border: 1px solid hsl(242, 18%, 64%);
+    height: 100%;
+}
+
+
+
+
+
+
+.list a,
 button {
   all: unset;
   cursor: pointer;
 }
-.signup a{
-  color: #d23b46;
+.list a{
+  color:#d23b46;
 }
 
-.signup  img {
+.list  img {
   width: 100%;
   height: 100%;
   display: block;
@@ -57,11 +118,11 @@ button {
 
 
 
-.signup  .container {
+.list .container {
 
   width: 100%;
   display: flex;
-  margin-inline: 1rem;
+  /* margin-inline: 1rem; */
  
 }
 
@@ -71,56 +132,58 @@ button {
 
 
 @media screen and (max-width: 60rem) {
-  .signup  .container {
+  .list .container {
     width: 100%;
     margin: 0;
   }
 
 }
 
-.signup  .form-section {
-  width: 50%;
+.list .form-section {
+  width: 100%;
   background-color: white;
   padding: 2.5rem 1rem;
   display: flex;
-  align-items: center;
   text-align: left;
   border-radius: 10px;
+
 }
 
-.signup  .form-wrapper {
-  width: 75%;
+.list .form-wrapper {
+  width: 40%;
   margin: 0 auto;
+
 }
 
-.signup .form-wrapper > h2 {
+.list .form-wrapper > h2 {
   margin-bottom: 0.1rem;
 }
-.signup .form-wrapper > p {
+.list .form-wrapper > p {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-light);
   margin-bottom: 2rem;
 }
 
-.signup .input-container {
+.list .input-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
-.signup .form-group {
+.list .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  padding-bottom: 5%;
 }
-.signup .form-group label {
+.list .form-group label {
   font-size: 0.9375rem;
   font-weight: 600;
   color: #16164d;
 }
-.signup .form-group input {
+.list .form-group input {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-dark);
@@ -128,11 +191,11 @@ button {
   border: 2px solid var(--primary-lighter);
   border-radius: 0.3rem;
 }
-.signup .form-group input:focus {
+.list .form-group input:focus {
   border: 2px solid #16164d;
 }
 
-.signup .remember-forgot {
+.list .remember-forgot {
   display: flex;
   justify-content: space-between;
   font-size: 0.875rem;
@@ -140,20 +203,20 @@ button {
   margin-bottom: 1rem;
 }
 
-.signup .remember-me {
+.list .remember-me {
   display: grid;
   grid-template-columns: 1rem auto;
   gap: 0.6rem;
 }
 
-.signup input[type="checkbox"] {
+.list input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
   display: grid;
   place-content: center;
 }
 
-.signup .remember-me input {
+.list .remember-me input {
   width: 1rem;
   height: 1rem;
   margin-right: 0.3rem;
@@ -161,7 +224,7 @@ button {
   border-radius: 2px;
 }
 
-.signup input[type="checkbox"]::before {
+.list input[type="checkbox"]::before {
   content: "";
   width: 0.65em;
   height: 0.65em;
@@ -173,26 +236,26 @@ button {
   box-shadow: inset 1em 1em var(--form-control-color);
 }
 
-.signup input[type="checkbox"]:checked::before {
+.list input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
-.signup .remember-me input:checked {
+.list .remember-me input:checked {
   background: var(--primary-gradient);
 }
 
-.signup .remember-me label {
+.list .remember-me label {
   color: var(--text-dark);
   user-select: none;
 }
-.signup .remember-forgot a {
+.list .remember-forgot a {
   color: var(--primary);
 }
-.signup .remember-forgot a:hover {
+.list .remember-forgot a:hover {
   text-decoration: underline;
   text-decoration-color: var(--primary);
 }
 
-.signup .login-btn,
+.list .login-btn,
 .google-signin {
   width: 100%;
   display: flex;
@@ -205,79 +268,53 @@ button {
   border-radius: 0.5rem;
 }
 
-.signup .login-btn {
+.list .login-btn {
   color: white;
   background: #d23b46;
 }
-.signup .login-btn:hover {
+.list .login-btn:hover {
   opacity: 0.9;
 }
 
-.signup .or-divider {
-  width: 100%;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-block: 1.5rem;
-  text-align: center;
-  position: relative;
-}
-.signup .or-divider::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 1px;
-  width: 45%;
-  background-color: var(--text-light);
-}
-.signup .or-divider::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 0;
-  height: 1px;
-  width: 45%;
-  background-color: var(--text-light);
-}
 
-.signup .google-signin {
+.list .google-signin {
   border: 2px solid var(--primary-lighter);
 }
-.signup .google-signin svg {
+.list .google-signin svg {
   width: 1.5rem;
   height: 1.5rem;
 }
 
 @media screen and (max-width: 50rem) {
-  .signup .container {
+  .list .container {
     flex-direction: column;
     margin-inline: 0;
   }
 
-  .signup .image-section,
+  .list .image-section,
   .form-section {
     width: 100%;
   }
 
   
 
-  .signup .form-section {
+  .list .form-section {
     flex: 1;
     padding: 1rem 1rem;
   }
-  .signup .logo-container {
+  .list .logo-container {
     margin-bottom: 1rem;
   }
-  .signup .form-wrapper > h2 {
+  .list .form-wrapper > h2 {
     font-size: 1.25rem;
   }
-  .signup .form-wrapper > p {
+  .list .form-wrapper > p {
     margin-bottom: 1rem;
   }
-  .signup .form-wrapper button {
+  .list .form-wrapper button {
     font-size: 0.875rem;
   }
-  .signup .or-divider {
+  .list .or-divider {
     font-weight: 500;
     margin-block: 0.6rem;
   }
@@ -285,7 +322,7 @@ button {
 
 @media screen and (max-width: 36.25rem) {
 
-  .signup .form-wrapper {
+  .list .form-wrapper {
     width: 100%;
   }
 }
