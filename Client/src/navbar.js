@@ -82,7 +82,7 @@ function Navbar() {
         </li>
   
         <li class="active">
-          <a href="/api/v1/users/list">
+          <a href="/api/v1/users/bikedetails">
              List A Ride
           </a>
         </li>

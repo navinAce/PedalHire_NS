@@ -38,10 +38,10 @@ video
 }
 
 
-.banner h1 {
+.home .banner h1 {
   font-size: 30px;
 }
-.banner h2{
+.home .banner h2{
   font-size: 20px;
  
 
@@ -116,7 +116,7 @@ button#search-btn {
   color: #9e9e9e;
   display: inline-block;
   font-family: 'Roboto', Arial, sans-serif;
-  font-size: 16px;
+  font-size: 85%;
   margin: 35px 10px 10px;
   max-width: 20%;
   min-width: 250px;
@@ -191,13 +191,7 @@ body{
   background: #f0f0f0;
 }
 
-.testimonials h1 {
-  font-family: 'El Messiri', sans-serif;
-  text-align: left;
-  margin-left: 7%;
-  font-size: 40px;
-  margin-bottom: 3%;
-}
+
 
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
@@ -212,13 +206,15 @@ body{
   margin-bottom: 10%;
 }
 
-.faq h1 {
+.home  h1 {
   font-family: 'El Messiri', sans-serif;
   text-align: left;
   margin-left: 7%;
   font-size: 40px;
   margin-bottom: 3%;
 }
+
+
 
 h1 {
   margin-bottom: 20px;

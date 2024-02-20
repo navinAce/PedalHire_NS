@@ -22,11 +22,20 @@ const bikeSchema=new Schema({
         type:String,
         required:true
     },
-    bikephoto:{
+//     bikephoto:{
+//         type:[String],
+//         required:true
+// },
+bikephoto:{
+    photo1:{
         type:String,
         required:true
-    },
-    yourlocation:{
+    },photo2:{
+        type:String,
+        required:true
+    }
+},
+    location:{
         type:String,
         required:true,
     },
@@ -42,7 +51,8 @@ const bikeSchema=new Schema({
     availabletodate: {
         type: Date,
         required: true
-    }
+    },
+
 }
 ,{
     timestamps:true

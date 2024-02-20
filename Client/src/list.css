@@ -4,14 +4,14 @@
 
 
 .list {
-    height: 120vh;
+    height: 150vh;
     width: 100%;
     background: #f0f0f0;
 
 }
 
 .list .overlay{
-  height: 120vh;
+  height: 150vh;
 }
 
 .list form {
@@ -21,13 +21,28 @@
     
 }
 
+.list form svg {
+  width: 15px;
+  margin-left: 2%;
+}
+
+.list .information-icon {
+  background: rgb(217, 224, 223);
+  position: absolute;
+  left: 16.5%;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-weight: 800;
+  
+}
+
 
 .list .form-content{
 
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -30%);
+  transform: translate(-50%, -20%);
   display: flex;
 }
 
@@ -72,6 +87,7 @@
   color: white;
   text-align: left;
   padding: 5%;
+  padding-top: 8%;
 }
 
 .fc2-content {
@@ -99,7 +115,15 @@
 
 
 
+.list .radio-container{
+  display: inline-block;
+  margin-right: 20px;
+}
 
+.list .radio-label {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px; }
 
 .list a,
 button {
@@ -115,6 +139,28 @@ button {
   height: 100%;
   display: block;
 }
+
+
+
+
+.list .form-radio input {
+  position: absolute;
+  left: 8%;
+  margin-top: 6px;
+}
+
+.list .form-group.form-date input {
+  position: absolute;
+  left: 40%;
+}
+.list .form-group.form-date {
+  display: contents;
+}
+
+
+
+
+
 
 
 
@@ -269,8 +315,14 @@ button {
 }
 
 .list .login-btn {
-  color: white;
-  background: #d23b46;
+  
+    color: white;
+    background: #d23b46;
+    width: 50%;
+    position: relative;
+    left: 25%;
+    margin-bottom: 8%;
+
 }
 .list .login-btn:hover {
   opacity: 0.9;

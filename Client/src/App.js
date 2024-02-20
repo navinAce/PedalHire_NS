@@ -1,5 +1,6 @@
 
 import "./App.css"
+import "./responsive.css"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './home'
 import Login from './login'
@@ -20,7 +21,7 @@ function App() {
       <Route path="/api/v1/users/login" element={<Login />} />
       <Route path="/api/v1/users/register" element={<Signup />} />
       <Route path="/api/v1/users/contact" element={<Contact />}/>
-      <Route path="/api/v1/users/list" element={<List />}/>
+      <Route path="/api/v1/users/bikedetails" element={<List />}/>
       
 
     </Routes>

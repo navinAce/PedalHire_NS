@@ -1,0 +1,19 @@
+@media only screen and (max-width: 1226px) {
+
+    .home .banner h1 {
+        margin-bottom: 0% !important;
+    }
+
+   .contact_us {
+        height: 120vh !important;
+    }
+
+    .contact .overlay {
+        height: 120vh !important;
+ 
+    }
+
+    .footer {
+        padding-left: 7% !important;
+    }
+  }
