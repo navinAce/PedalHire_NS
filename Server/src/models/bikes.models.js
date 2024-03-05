@@ -1,7 +1,7 @@
 import mongoose ,{ Schema } from 'mongoose';
 
 const bikeSchema=new Schema({
-    listerid:{
+    username:{
         type:String,
         required:true,
     },

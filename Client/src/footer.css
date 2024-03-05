@@ -23,6 +23,9 @@ ul{
 	background-color: #24262b;
     padding: 70px 0;
     text-align: left;
+	position: relative;
+    z-index: 2;
+
 }
 .footer ul{
     padding-left: 0;

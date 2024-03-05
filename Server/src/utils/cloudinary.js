@@ -13,7 +13,7 @@ const uploadOnCloudinary = async (localFilePath) => {
         if (!localFilePath) return null
         //upload the file on cloudinary
         const response = await cloudinary.uploader.upload(localFilePath, {
-            resource_type: "image",
+            resource_type: "auto",
         })
         // file has been uploaded successfull
         fs.unlinkSync(localFilePath)
@@ -26,6 +26,28 @@ const uploadOnCloudinary = async (localFilePath) => {
     }
 }
 
+const extractPublicIdFromUrl = (url) => {
+    const regex = /\/([^/]+?)\.[a-z0-9]+$/i;
+    const match = url.match(regex);
+    // console.log("match ", match);
+    if (match && match[1]) {
+        // console.log("match[1] ", match[1]);
+      return match[1];
+    }
+    return null;
+  };
+
+  const deleteFromCloudinary = async (publicId) => {
+    try {
+      // console.log("publicId ", publicId);
+      await cloudinary.uploader.destroy(publicId);
+      console.log('Image deleted from Cloudinary');
+    } catch (error) {
+      console.error('Error deleting image from Cloudinary:', error);
+      throw new Error('Failed to delete image from Cloudinary');
+    }
+  };
 
 
-export {uploadOnCloudinary}
+
+export {uploadOnCloudinary, extractPublicIdFromUrl, deleteFromCloudinary}

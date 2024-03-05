@@ -3,6 +3,30 @@ import "./navbar.css";
 
  
 function Navbar() {
+  const checkStatus=async()=>{
+    try {
+      const response=await fetch('/api/v1/users/checkstatus')
+      const data=await response.json();
+      console.log(data.data);
+      if(data.data){
+        window.location.href = "/api/v1/users/bikedetails";
+      }else{
+        alert("Please complete your profile to continue further.")
+        window.location.href = "/api/v1/users/login";
+      }
+    } catch (error) {
+      alert("Please login/register first.")
+    }
+  }
+ 
+const dashboard=async()=>{
+  const response=await fetch('/api/v1/users/checkstatus')
+  if(response.status===200){
+    window.location.href = "/api/v1/users/dashboard";
+}else{
+  alert("Please login/register first.")
+}}
+
   return (
 
 
@@ -68,9 +92,12 @@ function Navbar() {
       <ul class="menu cf cf-right">
 
       <li>
-          <a href="/">
+          <a style={{color:'white'}} onClick={dashboard} href>
             How It Works
           </a>
+          {/* <a href="/api/v1/users/dashboard">
+            How It Works
+          </a> */}
           
         </li>
        
@@ -82,7 +109,7 @@ function Navbar() {
         </li>
   
         <li class="active">
-          <a href="/api/v1/users/bikedetails">
+        <a id="temp" style={{color:'white'}} onClick={checkStatus} href>
              List A Ride
           </a>
         </li>

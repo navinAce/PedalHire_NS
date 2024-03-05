@@ -22,7 +22,7 @@ const getDetailsFromFrontend= asyncHandler( async (req,res) => {
     }
     const isWillingToDeliver = willingtodeliver === 'Yes'? true : false;
 
-    const listerid=req.user._id;
+    const username=req.user.username;
 
     const nameRegex = /^[a-zA-Z0-9 ]{5,40}$/;      //bikenamemodel val
     if(!nameRegex.test(bikenamemodel)){
@@ -76,7 +76,7 @@ const getDetailsFromFrontend= asyncHandler( async (req,res) => {
     }
 
     const bike= await Bike.create({
-        listerid,
+        username,
         bikenamemodel,
         bikenumber,
         priceperday,
