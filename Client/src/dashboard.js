@@ -7,12 +7,13 @@ import { verifySchema } from "./schemas/validationverify.js";
 function Dashboard() {
   const [errors, setErrors] = useState({});
   const [userData, setUserData] = useState(null);
+  const [bikeData, setBikeData] = useState(null);
 
   useEffect(() => {
     // Fetch user data from the backend
     const fetchUserData = async () => {
       try {
-        const response = await fetch("/api/v1/users/fetchUserData"); // Replace '/api/v1/users/profile' with the actual endpoint to fetch user data
+        const response = await fetch("/api/v1/users/fetchUserData");
         if (response.ok) {
           const data = await response.json();
           const user = data.data;
@@ -27,6 +28,26 @@ function Dashboard() {
 
     fetchUserData();
     blockindDocIfTrue();
+  }, []);
+
+  useEffect(() => {
+    // Fetch user data from the backend
+    const fetchBikeData = async () => {
+      try {
+        const response = await fetch("/api/v1/users/fetch-bike-details");
+        if (response.ok) {
+          const data = await response.json();
+          const bike = data.data;
+          setBikeData(bike);
+        } else {
+          console.error("Failed to fetch bike data");
+        }
+      } catch (error) {
+        console.error("Error fetching bike data:", error);
+      }
+    };
+
+    fetchBikeData();
   }, []);
 
   const handleErrors = async (event) => {
@@ -74,57 +95,54 @@ function Dashboard() {
     divRefs.current[nextIndex].scrollIntoView({ behavior: "smooth" });
   };
 
-  const jsonData = [
-    {
-      Account: "John Doe",
-      due_date: "04/01/2016",
-      amount: 30,
-      period: "03/01/2016 - 03/31/2016",
-    },
-    {
-      Account: "John Doe",
-      due_date: "04/01/2016",
-      amount: 30,
-      period: "03/01/2016 - 03/31/2016",
-    },
-    {
-      Account: "John Doe",
-      due_date: "04/01/2016",
-      amount: 30,
-      period: "03/01/2016 - 03/31/2016",
-    },
-    {
-      Account: "John Doe",
-      due_date: "04/01/2016",
-      amount: 30,
-      period: "03/01/2016 - 03/31/2016",
-    },
-    {
-      Account: "John Doe",
-      due_date: "04/01/2016",
-      amount: 30,
-      period: "03/01/2016 - 03/31/2016",
-    },
-    {
-      Account: "John Doe",
-      due_date: "04/01/2016",
-      amount: 30,
-      period: "03/01/2016 - 03/31/2016",
-    },
-  ];
-
   const renderTableData = () => {
-    return jsonData.map((data, index) => {
-      const { Account, due_date, amount, period } = data;
-      return (
-        <tr key={index}>
-          <td>{Account}</td>
-          <td>{due_date}</td>
-          <td>{amount}</td>
-          <td>{period}</td>
-        </tr>
-      );
-    });
+    return (
+      bikeData &&
+      bikeData.map((user, index) =>
+        user.bikeslisted.map((bike, bikeIndex) => {
+          // Parse the date strings into Date objects
+          const fromDate = new Date(bike.availablefromdate);
+          const toDate = new Date(bike.availabletodate);
+
+          // Format the date strings
+          const formattedFromDate = fromDate.toLocaleDateString();
+          const formattedToDate = toDate.toLocaleDateString();
+
+          let status;
+          let statusColor;
+          switch (bike.status) {
+            case "0":
+              status = "Pending";
+              statusColor = "orange";
+              break;
+            case "1":
+              status = "Approved";
+              statusColor = "green";
+              break;
+            case "2":
+              status = "Rejected";
+              statusColor = "red";
+              break;
+            default:
+              status = "Unknown Status";
+              break;
+          }
+
+          return (
+            <tr key={index}>
+              <td>{bike.bikenamemodel}</td>
+              <td>{bike.location}</td>
+              <td>
+                From: {formattedFromDate}
+                <br />
+                To: {formattedToDate}
+              </td>
+              <td style={{ color: statusColor }}>{status}</td>
+            </tr>
+          );
+        })
+      )
+    );
   };
 
   const [showContactUs, setShowContactUs] = useState(false);
@@ -142,7 +160,6 @@ function Dashboard() {
   const blockindDocIfTrue = async () => {
     const response = await fetch("/api/v1/users/checkstatus");
     const data = await response.json();
-    // console.log(data.data);
     if (data.data) {
       document.querySelector("#avatar").disabled = true;
       document.querySelector("#license").disabled = true;
@@ -161,57 +178,57 @@ function Dashboard() {
 
   const handleUsername = async (event) => {
     event.preventDefault();
-    const form = event.target;  
-    const username = form.elements["username"].value.trim(); 
+    const form = event.target;
+    const username = form.elements["username"].value.trim();
     if (!username) {
       alert("Please enter a new Username"); // Display an alert if the username is empty
       return;
-  }
-  const requestBody = {
-    username: username
-  };
-    try{
+    }
+    const requestBody = {
+      username: username,
+    };
+    try {
       const response = await fetch("/api/v1/users/update-username", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json" // Specify that the request contains JSON data
+          "Content-Type": "application/json", // Specify that the request contains JSON data
         },
-        body: JSON.stringify(requestBody) // Convert the JavaScript object to JSON string
-      }); 
+        body: JSON.stringify(requestBody), // Convert the JavaScript object to JSON string
+      });
       event.target.reset();
       const result = await response.json();
       console.log(result);
-    }catch(error){
+    } catch (error) {
       console.log("error while updating", error);
     }
-  }
+  };
 
   const handleUseraddress = async (event) => {
     event.preventDefault();
-    const form = event.target;  
-    const address = form.elements["address"].value.trim(); 
+    const form = event.target;
+    const address = form.elements["address"].value.trim();
     if (!address) {
       alert("Please enter a new Username"); // Display an alert if the username is empty
       return;
-  }
-  const requestBody = {
-    address: address
-  };
-    try{
+    }
+    const requestBody = {
+      address: address,
+    };
+    try {
       const response = await fetch("/api/v1/users/update-address", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json" // Specify that the request contains JSON data
+          "Content-Type": "application/json", // Specify that the request contains JSON data
         },
-        body: JSON.stringify(requestBody) // Convert the JavaScript object to JSON string
-      }); 
+        body: JSON.stringify(requestBody), // Convert the JavaScript object to JSON string
+      });
       event.target.reset();
       const result = await response.json();
       console.log(result);
-    }catch(error){
+    } catch (error) {
       console.log("error while updating", error);
     }
-  }
+  };
 
   const handleUserphoto = async (event) => {
     event.preventDefault();
@@ -228,7 +245,7 @@ function Dashboard() {
     } catch (error) {
       console.log("error while listing", error);
     }
-  }
+  };
 
   return (
     <div class="dashboard">
@@ -361,15 +378,15 @@ function Dashboard() {
           </div>
           <div class="col dashboard-col2 ">
             <div class="dashboard-details">
-              <h1>Rentals</h1>
+              <h1>Listed</h1>
 
               <table id="myTable">
                 <thead>
                   <tr>
-                    <th scope="col">Account</th>
-                    <th scope="col">Due Date</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Period</th>
+                    <th scope="col">Bike Name</th>
+                    <th scope="col">Zipcode</th>
+                    <th scope="col">Availability</th>
+                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>{renderTableData()}</tbody>
@@ -443,10 +460,11 @@ function Dashboard() {
                           you as soon as we can!.
                         </p>
 
-                        <form 
-                        onSubmit={handleUsername}
-                        method="post"
-                        enctype="multipart/form-data">
+                        <form
+                          onSubmit={handleUsername}
+                          method="post"
+                          enctype="multipart/form-data"
+                        >
                           <label for="username">Username</label>
 
                           <div style={{ display: "flex" }}>
@@ -463,17 +481,14 @@ function Dashboard() {
                         </form>
 
                         <hr />
-                        <form 
-                        onSubmit={handleUserphoto}
-                        method="post"
-                        enctype="multipart/form-data">
+                        <form
+                          onSubmit={handleUserphoto}
+                          method="post"
+                          enctype="multipart/form-data"
+                        >
                           <label for="avatar">Upload Profile Picture</label>
                           <div style={{ display: "flex" }}>
-                            <input 
-                            type="file"
-                            id="avatar"
-                            name="avatar" 
-                            />
+                            <input type="file" id="avatar" name="avatar" />
                             <button type="submit">
                               <i class="far fa-check-circle"></i>
                             </button>
@@ -481,10 +496,11 @@ function Dashboard() {
                         </form>
 
                         <hr />
-                        <form 
-                        onSubmit={handleUseraddress}
-                        method="post"
-                        enctype="multipart/form-data">
+                        <form
+                          onSubmit={handleUseraddress}
+                          method="post"
+                          enctype="multipart/form-data"
+                        >
                           <label for="address">Enter Address</label>
                           <div style={{ display: "flex" }}>
                             <textarea

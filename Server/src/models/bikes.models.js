@@ -52,6 +52,10 @@ bikephoto:{
         type: Date,
         required: true
     },
+    status: {
+        type:String,
+        default: "0"
+    },
 
 }
 ,{

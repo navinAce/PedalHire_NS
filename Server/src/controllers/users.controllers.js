@@ -523,7 +523,8 @@ const fetchBikeDetails = asyncHandler(async (req, res) => {
             "bikeslisted.willingtodeliver":1,
             "bikeslisted.availablefromdate":1,
             "bikeslisted.availabletodate":1,
-            "bikeslisted.createdAt":1
+            "bikeslisted.createdAt":1,
+            "bikeslisted.status":1,
         }
     }
   ]);
