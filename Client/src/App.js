@@ -9,16 +9,24 @@ import List from './list';
 import Dashboard from './dashboard';
 import EditProf from './editprof';
 import React, { useEffect, useState } from 'react';
+import AdminDash from "./admindash";
+import SearchedBike from "./searchedbike";
+import UserDetails from "./userdetails";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isVerify, setIsVerify] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
   const [isLoading1, setIsLoading1] = useState(true);
+  const [isLoading2, setIsLoading2] = useState(true);
 
   // Get the current pathname
   const pathname = window.location.pathname;
-  const noNavbar = pathname === '/api/v1/users/dashboard';
+  const noNavbar1 = pathname === '/api/v1/users/dashboard';
+  const noNavbar2 = pathname === "/api/v1/admin/admindashboard";
+  const noNavbar3 = pathname === "/api/v1/users/searchedbike";
+  const noNavbar4 = pathname === "/api/v1/admin/userdetails";
 
   useEffect(() => {
     const checkStatus = async () => {
@@ -53,6 +61,24 @@ function App() {
     VerifyStatus();
   }, []);
 
+  useEffect(() => {
+    const VerifyStatus = async () => {
+      try {
+        const response = await fetch('/api/v1/admin/is-admin');
+        const data = await response.json();
+        if (data.data === true) {
+          setIsAdmin(true);
+        }else{
+          setIsAdmin(false);
+        }
+      } catch (error) {
+        setIsAdmin(false);
+      }
+      setIsLoading2(false); // Update loading state once the check is completed
+    };
+    VerifyStatus();
+  }, []);
+
 
   const privateRoutes = () => {
     let auth = { 'token': isAuthenticated };
@@ -61,6 +87,11 @@ function App() {
 
   const verifyRoutes = () => {
     let auth = { 'token': isVerify };
+    return (auth.token ? <Outlet /> : <Navigate to="/api/v1/users/login" />);
+  }
+
+  const adminRoutes = () => {
+    let auth = { 'token': isAdmin };
     return (auth.token ? <Outlet /> : <Navigate to="/api/v1/users/login" />);
   }
 
@@ -73,24 +104,34 @@ function App() {
     return <div>Loading...</div>;
   }
 
+  if (isLoading2) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="app">
       <BrowserRouter>
         <div>
           {/* Render Navbar only if current route is not dashboard */}
-          {!noNavbar && <Navbar />}
+          {!noNavbar1 && !noNavbar2 && !noNavbar3 && !noNavbar4 && <Navbar />}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/api/v1/users/login" element={<Login />} />
             <Route path="/api/v1/users/register" element={<Signup />} />
             <Route path="/api/v1/users/contact" element={<Contact />} />
             <Route path="/api/v1/users/editprofile" element={<EditProf />} />
+            <Route path="/api/v1/users/searchedbike" element={<SearchedBike />}/>
             <Route element={privateRoutes()}>
               <Route path="/api/v1/users/dashboard" element={<Dashboard />} />
             </Route>
             <Route element={verifyRoutes()}>
               <Route path="/api/v1/users/bikedetails" element={<List />} /> 
             </Route>
+            <Route element={adminRoutes()}>
+            <Route path="/api/v1/admin/admindashboard" element={<AdminDash />}/>
+            <Route path="/api/v1/admin/userdetails" element={<UserDetails />}/>
+            </Route>
+            
             
           </Routes>
         </div>

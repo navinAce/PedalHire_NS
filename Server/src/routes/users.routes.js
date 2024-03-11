@@ -17,6 +17,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { getDetailsFromFrontend } from "../controllers/bikes.controllers.js";
 
+
 const router = Router();
 
 router.route("/register").post(
@@ -68,6 +69,7 @@ router.route("/update-avatar").post(verifyJWT,
   },
 ]),updateUserAvatar)
 router.route("/fetch-bike-details").get(verifyJWT,fetchBikeDetails)
+
 
 //secured routes
 router.route("/logout").post(verifyJWT, logoutUser);

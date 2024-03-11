@@ -3,6 +3,7 @@ import background from './img/img2.jpg'
 import { useFormik } from "formik";
 import { loginSchema } from "./schemas/validationlogin.js"
 
+
 const initialValues={ 
   email: "",
   password: "",
@@ -10,12 +11,13 @@ const initialValues={
 
 const Login = () =>{
 
+
   const {values,errors,touched,handleBlur,handleChange,handleSubmit}=useFormik({
     initialValues:initialValues,
     validationSchema:loginSchema,
     onSubmit:(values,action)=>{
-      action.resetForm()
       loginUser()
+      action.resetForm()
     },
   })
 
@@ -38,8 +40,13 @@ const Login = () =>{
       }
 
       const data = await response.json();
-      console.log("Registration successful:", data);
-      
+      console.log("Registration successful:", data.data.user);
+      if(data.data.user){
+        window.location.href="/api/v1/admin/admindashboard"
+      }
+      else{
+        window.location.href="/api/v1/users/dashboard"
+      }
     } catch (error) {
       console.error("Error during registration:", error);    
     }

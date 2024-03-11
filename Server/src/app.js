@@ -22,9 +22,11 @@ app.use(cookieParser())
 
 //routes import 
 import { router } from './routes/users.routes.js'
+import { adminrouter } from './routes/admin.routers.js'
 
 //routes declaration
 app.use("/api/v1/users",router)
+app.use("/api/v1/admin",adminrouter)
 //http:localhost:8000/api/v1/users/register
 
 export { app }  
