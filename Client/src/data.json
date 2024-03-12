@@ -26,7 +26,7 @@
     },
     {
         "id": 4,
-        "name": "Product 2",
+        "name": "Product 5",
         "description": "This is the description for Product 2",
         "price": 29.99,
         "image": "https://via.placeholder.com/150",
@@ -34,7 +34,7 @@
       },
       {
         "id": 5,
-        "name": "Product 2",
+        "name": "Product 6",
         "description": "This is the description for Product 2",
         "price": 29.99,
         "image": "https://via.placeholder.com/150",
@@ -42,7 +42,7 @@
       },
       {
         "id": 6,
-        "name": "Product 2",
+        "name": "Product 7",
         "description": "This is the description for Product 2",
         "price": 29.99,
         "image": "https://via.placeholder.com/150",

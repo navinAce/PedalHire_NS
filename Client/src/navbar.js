@@ -69,7 +69,7 @@ const dashboard=async()=>{
           
         </li>
         <li>
-          <a href="/">
+          <a href="/api/v1/users/about">
             About
           </a>
         </li>

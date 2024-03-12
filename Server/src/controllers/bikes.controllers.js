@@ -17,7 +17,7 @@ const getDetailsFromFrontend= asyncHandler( async (req,res) => {
     } = req.body;
 
     //validation and taking input from frontend
-    if ([bikenamemodel,bikenumber,priceperday,priceperweek,location,availablefromdate,availabletodate].some((field) => field?.trim() === "")){
+    if ([bikenamemodel,bikenumber,priceperday,priceperweek,location].some((field) => field?.trim() === "")){
         throw new ApiError(409, "Fields cannot be empty");
     }
     const isWillingToDeliver = willingtodeliver === 'Yes'? true : false;
@@ -102,4 +102,49 @@ const getDetailsFromFrontend= asyncHandler( async (req,res) => {
     
 });
 
-export { getDetailsFromFrontend };
+const fetchApprovedBikes = asyncHandler(async (req, res) => {
+
+    const bike = await Bike.aggregate([
+        {
+            $match: { status: "1",availabletodate:{$gte:new Date()} }
+        },
+      {
+        $lookup: {
+          from: "users",
+          localField: "username",
+          foreignField: "username",
+          as: "userDetails",
+        },
+      },
+      {
+          $project:{
+            "userDetails.username":1,
+            "userDetails.fullname":1,
+            "userDetails.phone":1,
+            "userDetails.address":1,
+            "userDetails.account":1,
+            "userDetails.createdAt":1,
+              bikenamemodel:1,
+              bikenumber:1,
+              priceperday:1,
+              priceperweek:1,
+              bikephoto:1,
+              location:1,
+              willingtodeliver:1,
+              availablefromdate:1,
+              availabletodate:1,
+              createdAt:1,
+              status:1,
+          }
+      }
+    ]);
+    if(!bike){
+      throw new ApiError(404, "error while fetching bike details");
+    }
+  
+    return res.status(200)
+    .json(new ApiResponse(200, bike, "Bike details fetched successfully"));
+  });
+
+
+export { getDetailsFromFrontend,fetchApprovedBikes };

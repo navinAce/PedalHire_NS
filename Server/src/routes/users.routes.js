@@ -15,7 +15,7 @@ import {
 } from "../controllers/users.controllers.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { getDetailsFromFrontend } from "../controllers/bikes.controllers.js";
+import { getDetailsFromFrontend,fetchApprovedBikes } from "../controllers/bikes.controllers.js";
 
 
 const router = Router();
@@ -70,6 +70,8 @@ router.route("/update-avatar").post(verifyJWT,
 ]),updateUserAvatar)
 router.route("/fetch-bike-details").get(verifyJWT,fetchBikeDetails)
 
+//searchBikeRoute
+router.route("/search-bike").get(fetchApprovedBikes)
 
 //secured routes
 router.route("/logout").post(verifyJWT, logoutUser);

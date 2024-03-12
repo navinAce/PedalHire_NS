@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 import AdminDash from "./admindash";
 import SearchedBike from "./searchedbike";
 import UserDetails from "./userdetails";
+import About from "./about";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -121,6 +122,7 @@ function App() {
             <Route path="/api/v1/users/contact" element={<Contact />} />
             <Route path="/api/v1/users/editprofile" element={<EditProf />} />
             <Route path="/api/v1/users/searchedbike" element={<SearchedBike />}/>
+            <Route path="/api/v1/users/about" element={<About />} />
             <Route element={privateRoutes()}>
               <Route path="/api/v1/users/dashboard" element={<Dashboard />} />
             </Route>

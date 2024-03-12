@@ -3,7 +3,8 @@ import background from "./img/img2.jpg";
 import React, { useState } from "react";
 import { listARideSchema } from "./schemas/validationlistaride.js";
 import { useNavigate } from "react-router-dom";
-
+import {Calendarto} from "./calender.js";
+import {Calendarfrom} from "./calenderfrom.js";
 const List = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -198,13 +199,7 @@ const List = () => {
                   <label for="availablefromdate">Availability</label>
                   <label for="drop-location">
                     From{" "}
-                    <input
-                      type="date"
-                      id="availablefromdate"
-                      name="availablefromdate"
-                      placeholder="from"
-                      onChange={handleErrors}
-                    />{" "}
+                    <Calendarfrom id="availablefromdate" onChange={handleErrors} />{" "}
                     {errors.availablefromdate && (
                       <p>{errors.availablefromdate}</p>
                     )}
@@ -212,13 +207,7 @@ const List = () => {
 
                   <label for="availabletodate">
                     To{" "}
-                    <input
-                      type="date"
-                      id="availabletodate"
-                      name="availabletodate"
-                      placeholder="to"
-                      onChange={handleErrors}
-                    />
+                    <Calendarto id="availabletodate" onChange={handleErrors} />
                     {errors.availabletodate && <p>{errors.availabletodate}</p>}
                   </label>
                 </div>
