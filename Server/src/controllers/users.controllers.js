@@ -9,6 +9,7 @@ import {
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import { Rent } from "../models/rents.models.js";
 
 const generateAccessAndRefreshTokens = async (userid) => {
   try {
@@ -491,7 +492,6 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
 });
 
 const fetchBikeDetails = asyncHandler(async (req, res) => {
-
   const bike = await User.aggregate([
     {
       $match: {
@@ -507,33 +507,44 @@ const fetchBikeDetails = asyncHandler(async (req, res) => {
       },
     },
     {
-        $project:{
-            username:1,
-            fullname:1,
-            phone:1,
-            address:1,
-            account:1,
-            createdAt:1,
-            "bikeslisted.bikenamemodel":1,
-            "bikeslisted.bikenumber":1,
-            "bikeslisted.priceperday":1,
-            "bikeslisted.priceperweek":1,
-            "bikeslisted.bikephoto":1,
-            "bikeslisted.location":1,
-            "bikeslisted.willingtodeliver":1,
-            "bikeslisted.availablefromdate":1,
-            "bikeslisted.availabletodate":1,
-            "bikeslisted.createdAt":1,
-            "bikeslisted.status":1,
-        }
-    }
+      $project: {
+        username: 1,
+        fullname: 1,
+        phone: 1,
+        address: 1,
+        account: 1,
+        createdAt: 1,
+        "bikeslisted.bikenamemodel": 1,
+        "bikeslisted.bikenumber": 1,
+        "bikeslisted.priceperday": 1,
+        "bikeslisted.priceperweek": 1,
+        "bikeslisted.bikephoto": 1,
+        "bikeslisted.location": 1,
+        "bikeslisted.willingtodeliver": 1,
+        "bikeslisted.availablefromdate": 1,
+        "bikeslisted.availabletodate": 1,
+        "bikeslisted.createdAt": 1,
+        "bikeslisted.status": 1,
+      },
+    },
   ]);
-  if(!bike){
+  if (!bike) {
     throw new ApiError(404, "error while fetching bike details");
   }
 
-  return res.status(200)
-  .json(new ApiResponse(200, bike, "Bike details fetched successfully"));
+  return res
+    .status(200)
+    .json(new ApiResponse(200, bike, "Bike details fetched successfully"));
+});
+
+const rentData = asyncHandler(async (req, res) => {
+  const rent=await Rent.find({renterid:req.user._id})
+  if (!rent) {
+    throw new ApiError(404, "error while fetching rent details");
+  }
+  return res
+    .status(200)
+    .json(new ApiResponse(200, rent, "Rent details fetched successfully"));
 });
 
 export {
@@ -550,4 +561,5 @@ export {
   updateUserAddress,
   updateUserAvatar,
   fetchBikeDetails,
+  rentData,
 };

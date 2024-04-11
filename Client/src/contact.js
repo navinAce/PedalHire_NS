@@ -2,6 +2,7 @@ import "./contact.css";
 import background from "./img/img2.jpg";
 import { validationFeedbackSchema } from "./schemas/validationfeedback.js";
 import { useFormik } from "formik";
+import Navbar from "./navbar.js";
 
 const initialValues = {
   name: "",
@@ -55,6 +56,7 @@ function Contact() {
 
   return (
     <div class="contact">
+      <Navbar />
       <div class="overlay"></div>
 
       <section class="contact_us" style={myStyle}>

@@ -2,6 +2,8 @@ import './login.css';
 import background from './img/img2.jpg'
 import { useFormik } from "formik";
 import { loginSchema } from "./schemas/validationlogin.js"
+import Navbar from "./navbar.js";
+
 
 
 const initialValues={ 
@@ -55,8 +57,10 @@ const Login = () =>{
 
     return(   
         <div class="login" style={myStyle}>
+         
 
 <div class="overlay" style={{zIndex: "0"}}></div>
+
 <section class="container">
 
 <form onSubmit={handleSubmit}>

@@ -186,7 +186,7 @@ function UserDetails() {
             </div>
           </div>
           <form action="">
-            <h3>Registration Form</h3>
+            <h3>User details</h3>
             {selectedData && (
               <>
                 <div class="form-wrapper">

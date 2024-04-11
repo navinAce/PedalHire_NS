@@ -15,6 +15,7 @@ import UserDetails from "./userdetails";
 import About from "./about";
 import Loader from './loader';
 import Checkout from './checkout';
+import Navbar2 from './navbar2';
 
 
 function App() {
@@ -25,13 +26,8 @@ function App() {
   const [isLoading1, setIsLoading1] = useState(true);
   const [isLoading2, setIsLoading2] = useState(true);
 
-  // Get the current pathname
-  const pathname = window.location.pathname;
-  const noNavbar1 = pathname === '/api/v1/users/dashboard';
-  const noNavbar2 = pathname === "/api/v1/admin/admindashboard";
-  const noNavbar3 = pathname === "/api/v1/users/searchedbike";
-  const noNavbar4 = pathname === "/api/v1/admin/userdetails";
-  const noNavbar5 = pathname === "/api/v1/users/checkout";
+  
+
   
 
   useEffect(() => {
@@ -96,6 +92,11 @@ function App() {
     return (auth.token ? <Outlet /> : <Navigate to="/api/v1/users/login" />);
   }
 
+  const placeorderRoutes = () => {
+    let auth = { 'token': isVerify };
+    return (auth.token ? <Outlet /> : <Navigate to="/api/v1/users/login" />);
+  }
+
   const adminRoutes = () => {
     let auth = { 'token': isAdmin };
     return (auth.token ? <Outlet /> : <Navigate to="/api/v1/users/login" />);
@@ -119,25 +120,28 @@ function App() {
       <BrowserRouter>
         <div>
           {/* Render Navbar only if current route is not dashboard */}
-          {!noNavbar1 && !noNavbar2 && !noNavbar3 && !noNavbar4 &&!noNavbar5 && <Navbar />}
+          
+
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/api/v1/users/login" element={<Login />} />
-            <Route path="/api/v1/users/register" element={<Signup />} />
-            <Route path="/api/v1/users/contact" element={<Contact />} />
-            <Route path="/api/v1/users/editprofile" element={<EditProf />} />
-            <Route path="/api/v1/users/searchedbike" element={<SearchedBike />}/>
-            <Route path="/api/v1/users/about" element={<About />} />
+            <Route path="/" element={<><Navbar /><Home /><Footer /></>} />
+            <Route path="/api/v1/users/login"element={<><Navbar /><Login /></>} />
+            <Route path="/api/v1/users/register" element={<><Navbar /><Signup /></>} />
+            <Route path="/api/v1/users/contact" element={<><Navbar /><Contact /><Footer /></>} />
+            <Route path="/api/v1/users/editprofile" element={<><Navbar /><EditProf /><Footer /></>} />
+            <Route path="/api/v1/users/searchedbike" element={<><SearchedBike /></>}/>
+            <Route path="/api/v1/users/about" element={<><Navbar /><About /><Footer /></>} />
             <Route element={privateRoutes()}>
-              <Route path="/api/v1/users/dashboard" element={<Dashboard />} />
+              <Route path="/api/v1/users/dashboard" element={<><Dashboard /><Footer /></>} />
             </Route>
             <Route element={verifyRoutes()}>
-              <Route path="/api/v1/users/bikedetails" element={<List />} /> 
+              <Route path="/api/v1/users/bikedetails" element={<><Navbar /><List /><Footer /></>} /> 
             </Route>
             <Route element={adminRoutes()}>
             <Route path="/api/v1/admin/admindashboard" element={<AdminDash />}/>
             <Route path="/api/v1/admin/userdetails" element={<UserDetails />}/>
-            <Route path="/api/v1/users/checkout" element={<Checkout />}/>
+            <Route element={placeorderRoutes()}>
+              <Route path="/api/v1/users/checkout" element={<Checkout />} /> 
+            </Route>
          
            
             </Route>
@@ -146,7 +150,7 @@ function App() {
             
           </Routes>
         </div>
-        <Footer />
+        
       </BrowserRouter>
     </div>
   );

@@ -3,6 +3,8 @@ import { ApiError } from "../utils/ApiError.js";
 import { Bike } from "../models/bikes.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { User } from "../models/users.models.js";
+import { Rent } from "../models/rents.models.js";
 
 const getDetailsFromFrontend= asyncHandler( async (req,res) => {
     const {
@@ -106,7 +108,7 @@ const fetchApprovedBikes = asyncHandler(async (req, res) => {
 
     const bike = await Bike.aggregate([
         {
-            $match: { status: "1",availabletodate:{$gte:new Date()} }
+            $match: { status: "1",isbooked:false,availabletodate:{$gte:new Date()} }
         },
       {
         $lookup: {
@@ -146,5 +148,51 @@ const fetchApprovedBikes = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, bike, "Bike details fetched successfully"));
   });
 
+const fetchBikeDetailsForCheckOut = asyncHandler(async (req, res) => {
+    const bikeId = req.params.bikeId;
+    const bike = await Bike.findOne({ _id: bikeId });
+    if (!bike) {
+      throw new ApiError(404, "Bike not found");
+    }
+    return res.status(200)
+    .json(new ApiResponse(200, bike, "Bike details fetched successfully"));
+})
 
-export { getDetailsFromFrontend,fetchApprovedBikes };
+const updateisbooked = asyncHandler(async (req, res) => {
+    const bikeId = req.params.bikeId;
+    const pickupDate = req.params.pickupDate;
+    const dropDate = req.params.dropDate;
+    const totalCost = req.params.totalCost;
+    const location = req.params.location;
+    const bike = await Bike.findOne({ _id: bikeId });
+    if (!bike) {
+      throw new ApiError(404, "Bike not found");
+    }
+    bike.isbooked = true;
+    await bike.save({ validateBeforeSave: false });
+    const user = await User.findOne({ _id: req.user._id });
+    if (!user) {
+      throw new ApiError(404, "User not found");
+    }
+    let status
+    if(user.username === bike.username){
+        status="1";
+    }
+
+    const rent=await Rent.create({
+        renterid:user._id,
+        bikeid:bike._id,
+        pickupDate:pickupDate,
+        dropDate:dropDate,
+        rentamount:totalCost,
+        rentstatus:status,
+        renterlocation:location,
+    })
+    if(!rent){
+        throw new ApiError(500,"Something went wrong while storing the rent")
+    }
+    return res.status(200)
+    .json(new ApiResponse(200, rent, "Bike details updated successfully"));
+})
+
+export { getDetailsFromFrontend,fetchApprovedBikes,fetchBikeDetailsForCheckOut,updateisbooked };

@@ -88,22 +88,22 @@ const dashboard=async()=>{
           <ul class="submenu">
             <li>
               <a href="/">
-                Web design
+                Kits
               </a>
             </li>
             <li>
               <a href="/">
-                Graphics design
+                Components
               </a>
             </li>
             <li>
               <a href="/">
-                App development
+                Accessories
               </a>
             </li>
             <li>
               <a href="/">
-                Marketing
+                Helments
               </a>
             </li>
           </ul>
@@ -125,7 +125,11 @@ const dashboard=async()=>{
         
       </ul>
 
-      <a class="main-logo" href="/"><img src={logo} alt=""/></a>
+      <a class="main-logo" href="/">
+        <img src={logo} alt=""/>
+        </a>
+
+    
 
 
 
@@ -135,7 +139,7 @@ const dashboard=async()=>{
 
       <li>
           <a style={{color:'white'}} onClick={dashboard} href>
-            How It Works
+            Dashboard
           </a>
           {/* <a href="/api/v1/users/dashboard">
             How It Works
@@ -150,8 +154,8 @@ const dashboard=async()=>{
           </a>)  }
           <ul class="submenu inverted-submenu">
             <li>
-              <a href="/api/v1/users/dashboard">
-                Dashboard
+              <a href="/api/v1/users/register">
+                Register
               </a>
             </li>
             <li>

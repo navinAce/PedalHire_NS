@@ -8,6 +8,7 @@ function Dashboard() {
   const [errors, setErrors] = useState({});
   const [userData, setUserData] = useState(null);
   const [bikeData, setBikeData] = useState(null);
+  const [rentData, setRentData] = useState(null);
 
   useEffect(() => {
     // Fetch user data from the backend
@@ -28,6 +29,26 @@ function Dashboard() {
 
     fetchUserData();
     blockindDocIfTrue();
+  }, []);
+
+  useEffect(() => {
+    // Fetch user data from the backend
+    const fetchRentData = async () => {
+      try {
+        const response = await fetch("/api/v1/users/rent-data");
+        if (response.ok) {
+          const data = await response.json();
+          const rent = data.data;
+          setRentData(rent);
+        } else {
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchRentData();
   }, []);
 
   useEffect(() => {
@@ -144,6 +165,40 @@ function Dashboard() {
       )
     );
   };
+
+  const renderRentTableData=(rentData)=>{
+    return rentData && rentData.map((rent, index) => {
+      // Parse the date strings into Date objects
+      const fromDate = new Date(rent.pickupDate);
+      const toDate = new Date(rent.dropDate);
+
+      // Format the date strings
+      const formattedFromDate = fromDate.toLocaleDateString();
+      const formattedToDate = toDate.toLocaleDateString()
+      let status;
+      let statusColor;
+      if(rent.rentstatus==="0"){
+        status="Lister"
+        statusColor = "green"
+      }else{
+        status="Renter"
+        statusColor = "red"
+      }
+      
+      return (
+        <tr key={index}> 
+        <td>{rent.renterlocation}</td>     
+          <td>{rent.rentamount}</td>
+          <td>
+            From: {formattedFromDate}
+            <br />
+            To: {formattedToDate}
+          </td>
+          <td style={{ color: statusColor }}>{status}</td>
+        </tr>
+      );
+    });
+  }
 
   const [showContactUs, setShowContactUs] = useState(false);
 
@@ -399,19 +454,15 @@ function Dashboard() {
               <table>
                 <thead>
                   <tr>
-                    <th scope="col">Account</th>
-                    <th scope="col">Due Date</th>
+                    
+                    <th scope="col">Location</th>
                     <th scope="col">Amount</th>
-                    <th scope="col">Period</th>
+                    <th scope="col">Availability</th>
+                    <th scope="col">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td data-label="Account">Visa - 341</td>
-                    <td data-label="Due Date">04/01/2016</td>
-                    <td data-label="Amount">$1,190</td>
-                    <td data-label="Period">03/01/2016 - 03/31/2016</td>
-                  </tr>
+                  {renderRentTableData(rentData)}
                 </tbody>
               </table>
             </div>

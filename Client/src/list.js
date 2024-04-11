@@ -223,24 +223,20 @@ const List = () => {
           <div class="fc2-content">
             <h3>Listing is Totally Free</h3>
             <p>
-              It is completely free to list your ride on Spinlister. We only
+              It is completely free to list your ride on PedalHire. We only
               make money when you make a purchase from our inventory.
             </p>
           </div>
           <div class="fc2-content">
-            <h3>Verification Tools</h3>
+            <h3>Licence Verification: </h3>
             <p>
-              Spinlister gives renters simple Facebook, Twitter, Mobile, and
-              Credit Card verification to ensure you are only renting to
-              trustworthy renters.
+            Verify renters' identities by requesting a copy of their valid driver's licence. This helps ensure that renters are legally eligible to operate the rented vehicles.
             </p>
           </div>
           <div class="fc2-content">
-            <h3>Your Ride, Your Schedule</h3>
+            <h3>RC Book Verification: </h3>
             <p>
-              You can accept or decline rental requests if you are busy or you
-              can't make the rental work. No sweat! Just be sure to decline so
-              your response rate doesn't drop.
+            Validate the ownership of vehicles by requesting the Registration Certificate (RC Book) from renters. This ensures that the vehicles being rented are legally owned and can be rented out.
             </p>
           </div>
         </div>

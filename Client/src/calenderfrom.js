@@ -37,7 +37,7 @@ function Calendarfrom({id, onChange }) {
       id={id}
       name={id}
       placeholder="to"
-      onChange={onChange}
+      onChange={(e) => onChange(e.target.value)} 
     />
   );
 }

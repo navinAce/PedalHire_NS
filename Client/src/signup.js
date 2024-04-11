@@ -4,6 +4,7 @@ import background from "./img/img2.jpg";
 import { useFormik } from "formik";
 import { signUpSchema } from "./schemas/validationsignup.js"; 
 import { useNavigate } from 'react-router-dom';
+import Navbar from "./navbar.js";
  
 //import { FaGoogle } from "react-icons/fa";
 
@@ -64,6 +65,7 @@ const Signup = () => {
 
   return (
     <div class="signup" style={myStyle1}>
+      
       <section class="container">
         <form onSubmit={handleSubmit} method="POST">
           <div class="form-section">

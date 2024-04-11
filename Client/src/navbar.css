@@ -149,11 +149,8 @@
  transform: skewX(-25deg) translateX(-15px);   
 }
 
-.main-logo{
-    font-family: 'Pattaya', sans-serif;
-    font-size: 60px;
-    color: white;
-    text-decoration: none;
+.navbar img{
+ width: 250px;
 
 }
 

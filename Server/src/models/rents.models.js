@@ -7,11 +7,11 @@ const rentSchema=new Schema({
     bikeid:{
         type:String,
     },
-    rentfromdate:{
+    pickupDate:{
         type:Date,
         required:true
     },
-    renttodate:{
+    dropDate:{
         type:Date,
         required:true
     },
@@ -21,7 +21,7 @@ const rentSchema=new Schema({
     },
     rentstatus:{
         type:String,
-        default: "0"
+        default: "0"    // 0: lister ,1 : renter
     },
     renterlocation:{
         type:String,

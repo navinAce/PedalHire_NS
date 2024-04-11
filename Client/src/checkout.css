@@ -75,8 +75,10 @@
 .checkout-product img{
     width: 120px;
     height: 150px;
-    object-fit: cover;
     border-radius: 10px;
+    object-fit: scale-down;
+    border-radius: 10px;
+    border: 1px solid grey;
 
 }
 

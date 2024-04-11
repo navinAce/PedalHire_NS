@@ -11,11 +11,12 @@ import {
   updateUserName,
   updateUserAddress,
   updateUserAvatar,
-  fetchBikeDetails
+  fetchBikeDetails,
+  rentData,
 } from "../controllers/users.controllers.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { getDetailsFromFrontend,fetchApprovedBikes } from "../controllers/bikes.controllers.js";
+import { getDetailsFromFrontend,fetchApprovedBikes,fetchBikeDetailsForCheckOut,updateisbooked } from "../controllers/bikes.controllers.js";
 import { getFeedbacks } from "../controllers/feedback.controllers.js";
 
 
@@ -73,6 +74,7 @@ router.route("/fetch-bike-details").get(verifyJWT,fetchBikeDetails)
 
 //searchBikeRoute
 router.route("/search-bike").get(fetchApprovedBikes)
+router.route("/rent-data").get(verifyJWT,rentData)
 
 //feedback route
 router.route("/feedback").post(verifyJWT,getFeedbacks)
@@ -82,4 +84,7 @@ router.route("/logout").post(verifyJWT, logoutUser);
 router.route("/change-password").post(verifyJWT, changeCurrentPassword);
 router.route("/refresh-token").post(refreshAccessToken);
 router.route("/fetchUserData").get(verifyJWT,getCurrentUser)
+router.route("/fetch-bike-details/:bikeId").get(verifyJWT,fetchBikeDetailsForCheckOut)
+router.route("/:bikeId/:pickupDate/:dropDate/:totalCost/:location/updateisbooked").post(verifyJWT,updateisbooked)
+
 export { router };

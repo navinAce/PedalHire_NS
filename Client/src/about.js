@@ -2,7 +2,7 @@ import "./about.css";
 import background from "./img/img2.jpg";
 import img1 from "./img/img4.jpg";
 import React, { useEffect, useState } from 'react';
-
+import Navbar from "./navbar.js";
 
 const About = () => {
   const myStyle = {
@@ -53,6 +53,7 @@ const About = () => {
 
   return (
     <div class="about">
+      <Navbar/>
       <div class="overlay"></div>
 
       <section class="about-us" style={myStyle}>

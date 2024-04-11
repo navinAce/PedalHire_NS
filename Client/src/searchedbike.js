@@ -5,6 +5,7 @@ import {Calendarfrom} from "./calenderfrom.js";
 import {Calendarsearch} from "./calender.js";
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function SearchedBike() {
   const [appBikeData, setAppBikeData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,10 +15,31 @@ function SearchedBike() {
   const [selectedData, setSelectedData] = useState(null); // State to store selected data
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState([]);
+  const [pickupDate, setPickupDate] = useState(null);
+  const [dropDate, setDropDate] = useState(null);
+  const [bothDatesSelected, setBothDatesSelected] = useState(false);
+  
   //const [placeOrder, setPlaceOrder] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
- 
+  const handlePlaceOrder = (bikeId,pickupDate,dropDate) => {
+    // Construct the URL for the payout page with the bike ID
+    const payoutUrl = `/api/v1/users/checkout?bikeId=${bikeId}&pickupDate=${pickupDate}&dropDate=${dropDate}`;
+
+    // Redirect the user to the payout page
+    navigate(payoutUrl);
+  };
+
+  const handlePickupDateChange = (date) => {
+    setPickupDate(date);
+    if (date && dropDate) {
+      setBothDatesSelected(true);
+    } else {
+      setBothDatesSelected(false);
+    }
+  };
+
 
   useEffect(() => {
     if (selectedData) {
@@ -109,8 +131,15 @@ function SearchedBike() {
     fetchAppBikeData();
   }, []);
 
+
   const handleDateChange = (date) => {
+    setDropDate(date);
     setSelectedDropDate(date);
+    if (pickupDate && date) {
+      setBothDatesSelected(true);
+    } else {
+      setBothDatesSelected(false);
+    }
   };
   const renderTableData = () => {
     const filteredUsers =
@@ -121,21 +150,7 @@ function SearchedBike() {
       const dropDate = new Date(selectedDropDate);
 
 
-        // const placeorder = async (bikeId) => {
-        //   try {
-        //     const response = await fetch("/api/v1/users/");
-        //     if (response.ok) {
-        //       const data = await response.json();
-        //       const userorder = data.data;
-        //       setPlaceOrder(userorder);
-        //       console.log("Bike data:", userorder);
-        //     } else {
-        //       console.error("Failed to fetch bike data");
-        //     }
-        //   } catch (error) {
-        //     console.error("Error fetching bike data:", error);
-        //   }
-        // };
+        
     
 
   // Filter the results based on the drop date
@@ -211,7 +226,7 @@ function SearchedBike() {
                 <div class="input-container">
                   <div class="form-group">
                     <label>Pickup Date</label>
-                    <Calendarfrom />
+                    <Calendarfrom onChange={handlePickupDateChange}/>
                   </div>
                 </div>
 
@@ -240,24 +255,13 @@ function SearchedBike() {
                     <input type="time" autocomplete="off" />
                   </div>
                 </div>
-                <button type="submit">Sign up</button>
+                <button type="submit">Search</button>
               </div>
             </form>
           </div>
         </div>
         <div class="col-9">
           <div className="product-list">
-            {/* {jsonData.products.map((product) => (
-              <div key={product.id} className="product">
-                <img src={product.image} alt={product.name} />
-                <h2>{product.name}</h2>
-
-                <div class="d-flex justify-content-between">
-                  <p>${product.price}/day</p>
-                  <button style={{ float: "right" }}>Book</button>
-                </div>
-              </div>
-            ))} */}
             {renderTableData()}
           </div>
         </div>
@@ -293,7 +297,7 @@ function SearchedBike() {
            
           </div>
           <form action="">
-            <h3>Registration Form</h3>
+            <h3>Bike details</h3>
             {selectedData && (
               <>
                 <div className="form-wrapper">
@@ -371,13 +375,13 @@ function SearchedBike() {
                   <i class="fas fa-map-marker" aria-hidden="true"></i>
                 </div>
                 <div class="form-button">
-                  
-                  <button 
-                  // onClick={() => placeorder (selectedData.bike._id)}
-                  >
-                    <Link to="/api/v1/users/checkout">Place order</Link>
-                    {/* <i class="fas fa-times" style={{ "font-size": "14px" }}></i> */}
-                  </button>
+                {bothDatesSelected ? (
+                <button onClick={() => handlePlaceOrder(selectedData.bike._id, pickupDate, dropDate)}>
+                  Place order
+                </button>
+              ) : (
+                <p style={{color: "#d23b46"}}><strong>Please select both pickup and drop dates</strong></p>
+              )}
                 </div>
               </>
             )}
