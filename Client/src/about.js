@@ -155,7 +155,9 @@ const About = () => {
           </div>
           <div class="col col2">
           <div class="d-flex">
-          <i class="fa fa-clipboard"></i> <h1>List Your Bike</h1>
+          <span class="material-symbols-outlined">
+receipt_long
+</span> <h1>List Your Bike</h1>
           </div>
           <p>Got a bike that's sitting idle in your garage? 
             Put it to good use and earn extra income by listing 
@@ -198,6 +200,32 @@ Towards Our Shared Goals</h2>
              communities where people of all ages and abilities have access to
               safe and convenient biking options, fostering a culture of health,
                sustainability, and inclusivity.</p>
+         
+          </div>
+        </div>
+      </div>
+
+      <div class="ph-mv2 text-center">
+     
+        {/* <h3>What We Do</h3> */}
+        <h2>Privacy Policy: Your Data, Our Responsibility.</h2>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <div class="d-flex">
+            <span class="material-symbols-outlined">
+security
+</span> <h1>Privacy Policy</h1>
+          </div>
+          <p>At PedalHire, we value your privacy. We collect personal information (name, email, phone) to facilitate bike rentals and communicate with you. Your data is used solely for service provision, communication, and improvement purposes. We implement security measures to protect your information and retain it as needed for legal and operational requirements</p>
+          </div>
+          <div class="col col2">
+          <div class="d-flex">
+          <span class="material-symbols-outlined">
+analytics
+</span> <h1>Analytics</h1>
+          </div>
+          <p>We may use third-party analytics services, such as Google Analytics, to collect and analyze information about your usage of our website. These services may use cookies and other tracking technologies to gather data, which helps us understand how users interact with our website and improve its performance.</p>
          
           </div>
         </div>

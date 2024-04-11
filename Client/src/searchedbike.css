@@ -3,7 +3,7 @@
 
 
 .searched-bike .bike-list{
-    margin-top: 10%;
+    margin-top: 2%;
    
 }
 
@@ -21,6 +21,7 @@
     padding: 4%;
     border: 2px solid var(--primary-lighter);
     border-radius: 0.3rem;
+    width: 100%;
 }
 
 .searched-bike .form-group label {
@@ -79,40 +80,268 @@
   }
   
   .searched-bike .product-list .product img {
-    width: 100%;
+    height: 175px;
     border-radius: 5px;
+    object-fit: cover;
   }
   
   .searched-bike .product-list .product h2 {
     margin-top: 10px;
     margin-bottom: 5px;
     font-size: 1.4em;
+    font-weight: 600;
   }
   
+  .searched-bike .product-list .product h4 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1em;
+    line-height: inherit;
+  }
+
+  .searched-bike .product-list .product-details {
+    line-height: 10px;
+    margin-top: 5%;
+}
+
+  .searched-bike .product-list .product h3 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    font-weight: 600;
+    display: ruby;
+  }
+
+  .searched-bike .product-list .product h3 p {
+    font-weight: 400;
+    font-size: 1rem;
+}
+
   .searched-bike .product-list .product p {
     margin: 5px 0;
   }
 
   .searched-bike .product-list button {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.6rem;
+    border-radius: 5px;
+    width: 40%;
     font-weight: 500;
-    padding: 0.4rem 0;
-    border-radius: 0.3rem;
     background: #d23b46;
     color: white;
+    height: 33px;
+    text-align: center;
+    margin-top: 2%;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
   
+
+
+
+.searched-bike .slider {
+  display: flex;
+  overflow-x: hidden;
+  position: relative;
+}
+
+
+
+.searched-bike .slider-controls {
+  margin-top: 10px;
+}
+
+.searched-bike .slider-controls button {
+  margin-right: 10px;
+}
+
+
+ .searched-bike .inner {
+  padding: 20px;
+  background: #fff;
+  max-width: 850px;
+  margin: auto;
+  display: flex;
+  padding-top: 10%;
+  width: 125%;
   
-  
+}
+ .searched-bike .inner .image-holder {
+  width: 50%;
+  display: flex;
+  margin-top: -6%;
+  position: relative;
+}
+
+ .searched-bike .inner .image-holder img {
+height: 550px;
+width: 400px;
+object-fit: cover;
+margin-top: 10%;
+}
+ .searched-bike .inner form {
+  width: 50%;
+  padding-top: 36px;
+  padding-left: 45px;
+  padding-right: 45px;
+  border: none;
+  margin: 0;
+}
+ .searched-bike .inner h3 {
+text-transform: uppercase;
+font-size: 25px;
+font-family: "Poppins-SemiBold";
+text-align: center;
+margin-bottom: 28px;
+}
+
+.searched-bike .inner .form-group {
+display: flex;
+}
+.searched-bike .inner .form-group input {
+width: 50%;
+}
+.searched-bike .inner .form-group input:first-child {
+margin-right: 25px;
+}
+
+.searched-bike .inner .form-wrapper {
+position: relative;
+}
+.searched-bike .inner .form-wrapper i {
+position: absolute;
+bottom: 9px;
+right: 0;
+}
+
+.searched-bike .inner .form-control {
+border: 1px solid #333;
+border-top: none;
+border-right: none;
+border-left: none;
+display: block;
+width: 100%;
+height: 30px;
+padding: 0;
+margin-bottom: 25px;
+}
+.searched-bike .inner .form-control::-webkit-input-placeholder {
+font-size: 13px;
+color: #333;
+font-family: "Poppins-Regular";
+}
+.searched-bike .inner .form-control::-moz-placeholder {
+font-size: 13px;
+color: #333;
+font-family: "Poppins-Regular";
+}
+.searched-bike .inner .form-control:-ms-input-placeholder {
+font-size: 13px;
+color: #333;
+font-family: "Poppins-Regular";
+}
+.searched-bike .inner .form-control:-moz-placeholder {
+font-size: 13px;
+color: #333;
+font-family: "Poppins-Regular";
+}
+
+.searched-bike .inner form button {
+  border: none;
+  width: 100%;
+  height: 51px;
+  margin: auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: #333;
+  font-size: 15px;
+  color: #fff;
+  vertical-align: middle;
+  transform: perspective(1px) translateZ(0);
+  transition-duration: 0.3s;
+  border-radius: 2px;
+  margin-left: 2%;
+}
+.searched-bike .inner button i {
+margin-left: 10px;
+-webkit-transform: translateZ(0);
+transform: translateZ(0);
+}
+.searched-bike .inner button:hover i,
+.searched-bike .inner button:focus i,
+.searched-bike .inner button:active i {
+-webkit-animation-name: hvr-icon-wobble-horizontal;
+animation-name: hvr-icon-wobble-horizontal;
+-webkit-animation-duration: 1s;
+animation-duration: 1s;
+-webkit-animation-timing-function: ease-in-out;
+animation-timing-function: ease-in-out;
+-webkit-animation-iteration-count: 1;
+animation-iteration-count: 1;
+}
+
+.searched-bike .inner .image-holder button {
+background: none;
+color: black;
+}
+
+
+ .inner0 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-45%, -50%);
+  margin-top: 2%;
+  width: 50%;
+  z-index: 30;
+}
+
+.searched-bike .inner button.close-button {
+  position: absolute;
+  left: 100%;
+  top: 2%;
+  background: none;
+  color: black;
+  font-size: 5vh;
+}
+
+.blur{
+  filter: blur(5px); 
+}
 
 
 
+ 
+.inner i.fas.fa-arrow-right {
 
 
+background: white;
+padding: 5px;
+}
+
+.inner i.fas.fa-arrow-left {
+
+background: white;
+padding: 5px;
+}
 
 
-  
+.inner .image-buttons {
+  display: flex;
+  position: absolute;
+  width: 80%;
+  top: 45%;
+  justify-content: space-between;
+  left: 6%;
+  margin-left: 2%;
+}
+
+.inner .form-button{
+display: flex;
+}
+
+
+.inner .form-button button {
+margin-left: 2%;
+}

@@ -13,6 +13,9 @@ import AdminDash from "./admindash";
 import SearchedBike from "./searchedbike";
 import UserDetails from "./userdetails";
 import About from "./about";
+import Loader from './loader';
+import Checkout from './checkout';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,6 +31,8 @@ function App() {
   const noNavbar2 = pathname === "/api/v1/admin/admindashboard";
   const noNavbar3 = pathname === "/api/v1/users/searchedbike";
   const noNavbar4 = pathname === "/api/v1/admin/userdetails";
+  const noNavbar5 = pathname === "/api/v1/users/checkout";
+  
 
   useEffect(() => {
     const checkStatus = async () => {
@@ -98,15 +103,15 @@ function App() {
 
   // Render loading state while checking authentication status
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div><Loader/></div>;
   }
 
   if (isLoading1) {
-    return <div>Loading...</div>;
+    return <div><Loader/></div>;
   }
 
   if (isLoading2) {
-    return <div>Loading...</div>;
+    return <div><Loader/></div>;
   }
 
   return (
@@ -114,7 +119,7 @@ function App() {
       <BrowserRouter>
         <div>
           {/* Render Navbar only if current route is not dashboard */}
-          {!noNavbar1 && !noNavbar2 && !noNavbar3 && !noNavbar4 && <Navbar />}
+          {!noNavbar1 && !noNavbar2 && !noNavbar3 && !noNavbar4 &&!noNavbar5 && <Navbar />}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/api/v1/users/login" element={<Login />} />
@@ -132,7 +137,11 @@ function App() {
             <Route element={adminRoutes()}>
             <Route path="/api/v1/admin/admindashboard" element={<AdminDash />}/>
             <Route path="/api/v1/admin/userdetails" element={<UserDetails />}/>
+            <Route path="/api/v1/users/checkout" element={<Checkout />}/>
+         
+           
             </Route>
+            
             
             
           </Routes>

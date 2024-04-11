@@ -1,8 +1,50 @@
 import "./navbar.css";
+import React, { useState, useEffect } from "react";
+import logo from './img/logo.png';
 
-
- 
 function Navbar() {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    // Fetch user data from the backend
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/api/v1/users/fetchUserData");
+        if (response.ok) {
+          const data = await response.json();
+          const user = data.data;
+          setUserData(user);
+        } else {
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData()
+  }, []);
+
+  
+
+  const logout = async () => {
+    const shouldLogout = window.confirm("Are you sure you want to log out?"); // Confirmation dialog
+    if (shouldLogout) {
+      try {
+        const response = await fetch('/api/v1/users/logout', {
+          method: "POST",
+        });
+        const data = await response.json();
+        console.log(data);
+        localStorage.removeItem("accessToken"); 
+        window.location.href = "/api/v1/users/login";
+      } catch (error) {
+        alert("Login first to logout."); 
+      }
+    }
+  };
+  
+
   const checkStatus=async()=>{
     try {
       const response=await fetch('/api/v1/users/checkstatus')
@@ -83,7 +125,7 @@ const dashboard=async()=>{
         
       </ul>
 
-      <a class="main-logo" href="/">PedalHire</a>
+      <a class="main-logo" href="/"><img src={logo} alt=""/></a>
 
 
 
@@ -102,9 +144,23 @@ const dashboard=async()=>{
         </li>
        
         <li>
-          <a href="/api/v1/users/login">
+          {userData ? 
+          (<a href>{userData.username}</a>) :(<a href="/api/v1/users/login">
             Log In
-          </a>
+          </a>)  }
+          <ul class="submenu inverted-submenu">
+            <li>
+              <a href="/api/v1/users/dashboard">
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a href onClick={logout}>
+              Log out
+              </a>
+            </li>
+            
+          </ul>
           
         </li>
   

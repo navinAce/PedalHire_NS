@@ -262,6 +262,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .about .ph-mv1{
     height: 100vh;
     padding-top: 4rem;
+    background: #e2e2e2;
 }
 
 .about .ph-mv1 h2 {
@@ -318,3 +319,79 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     left: -5%;
 
 }
+
+
+
+.about .ph-mv2{
+    height: 100vh;
+    padding-top: 4rem;
+    background: #ffffff;
+}
+
+.about .ph-mv2 h2 {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 3rem;
+    width: 60%;
+    display: inline-block;
+    margin-bottom: 2%;
+}
+
+.about .ph-mv2 h3 {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #d23b46;
+    
+}
+
+.about .ph-mv2 h1 {
+    font-family: 'Montserrat';
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.about .ph-mv2 .fas,.about .ph-mv2 .fa {
+    font-size: 50px;
+    padding-right: 30px;
+    color: #d23b46;
+}
+
+.about .ph-mv2 p {
+    width: 70%;
+    display: inline-flex;
+    font-size: 20px;
+    text-align: left;
+    margin-left: 15%;
+}
+
+.about .ph-mv2 .d-flex{
+    margin-left: 23%;
+    margin-bottom: 2%;
+}
+
+.about .ph-mv2 hr {
+    width: 70%;
+    display: inline-block;
+    margin-bottom: 3%;
+}
+
+.about .ph-mv2 .col2 {
+    position: relative;
+    left: -5%;
+
+}
+
+
+
+.about span.material-symbols-outlined {
+    font-size: 60px;
+    color: #d23b46;
+    margin-top: -10px;
+    margin-left: -3%;
+    margin-right: 3%;
+}
+
+
+

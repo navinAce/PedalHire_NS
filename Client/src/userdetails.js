@@ -170,7 +170,9 @@ function UserDetails() {
             <i class="far fa-window-close"></i>
           </button>
           <div class="image-holder">
+          <a href={images[currentImageIndex]} data-fancybox="gallery">
           {selectedData && <img src={images[currentImageIndex]} alt="" />}
+          </a>
             <div class="image-buttons">
               {" "}
               <button onClick={prevImage}>

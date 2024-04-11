@@ -2,13 +2,94 @@ import Navbar2 from "./navbar2";
 import "./searchedbike.css";
 import React, { useState, useEffect } from "react";
 import {Calendarfrom} from "./calenderfrom.js";
-import {Calendarto} from "./calender.js";
+import {Calendarsearch} from "./calender.js";
+import { useLocation } from "react-router-dom";
+import { Link } from 'react-router-dom';
 function SearchedBike() {
   const [appBikeData, setAppBikeData] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [userData, setUserData] = useState(null);
+  const [showContactUs, setShowContactUs] = useState(false);
+  const [selectedDropDate, setSelectedDropDate] = useState(null);
+  const [selectedData, setSelectedData] = useState(null); // State to store selected data
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [images, setImages] = useState([]);
+  //const [placeOrder, setPlaceOrder] = useState(null);
+  const location = useLocation();
+
+ 
+
+  useEffect(() => {
+    if (selectedData) {
+      // const userPhotos = [
+      //   selectedData.user.account.license,
+      //   selectedData.user.account.rcbook,
+      // ];
+      const bikePhotos = [
+        selectedData.bike.bikephoto.photo1,
+        selectedData.bike.bikephoto.photo2,
+      ];
+      setImages([ ...bikePhotos]);
+    }
+  }, [selectedData]);
+
+
+
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  // Function to handle navigation to the previous image
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleClickEdit = (userData, bikeData) => {
+    setShowContactUs(true);
+    setSelectedData({ user: userData, bike: bikeData });
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  };
+
+  const handleCloseContact = () => {
+    setShowContactUs(false);
+  };
+
+
+ 
 
   useEffect(() => {
     // Fetch user data from the backend
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("/api/v1/users/fetchUserData");
+        if (response.ok) {
+          const data = await response.json();
+          const user = data.data;
+          setUserData(user);
+        } else {
+          console.error("Failed to fetch user data");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData()
+  }, []);
+
+
+  useEffect(() => {
+    // Extract search query from URL when component mounts
+    const params = new URLSearchParams(location.search);
+    const query = params.get("q");
+    if (query) {
+      setSearchQuery(query);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
     const fetchAppBikeData = async () => {
       try {
         const response = await fetch("/api/v1/users/search-bike");
@@ -28,18 +109,49 @@ function SearchedBike() {
     fetchAppBikeData();
   }, []);
 
+  const handleDateChange = (date) => {
+    setSelectedDropDate(date);
+  };
   const renderTableData = () => {
     const filteredUsers =
     appBikeData &&
     appBikeData.filter((bike) =>
         bike.location.toLowerCase().includes(searchQuery.toLowerCase())
       );
+      const dropDate = new Date(selectedDropDate);
+
+
+        // const placeorder = async (bikeId) => {
+        //   try {
+        //     const response = await fetch("/api/v1/users/");
+        //     if (response.ok) {
+        //       const data = await response.json();
+        //       const userorder = data.data;
+        //       setPlaceOrder(userorder);
+        //       console.log("Bike data:", userorder);
+        //     } else {
+        //       console.error("Failed to fetch bike data");
+        //     }
+        //   } catch (error) {
+        //     console.error("Error fetching bike data:", error);
+        //   }
+        // };
+    
+
+  // Filter the results based on the drop date
+  const filteredUsersWithDropDate =
+    dropDate &&
+    filteredUsers &&
+    filteredUsers.filter((bike) => {
+      const toDate = new Date(bike.availabletodate);
+      return toDate >= dropDate;
+    });
     return (
-      filteredUsers &&
-      filteredUsers.map((bike, index) =>
+      filteredUsersWithDropDate &&
+      filteredUsersWithDropDate.map((bike, index) =>
         bike.userDetails.map((user, bikeIndex) => {
           const fromDate = new Date(bike.availablefromdate);
-          const formattedFromDate = fromDate.toLocaleDateString();
+          //const formattedFromDate = fromDate.toLocaleDateString();
           const toDate = new Date(bike.availabletodate);
           const formattedtoDate = toDate.toLocaleDateString();
 
@@ -47,16 +159,23 @@ function SearchedBike() {
             <div key={bike._id} className="product">
                 <img src={bike.bikephoto.photo1} alt={bike.bikenamemodel} />
                 <h2>{bike.bikenamemodel}</h2>
-                <p>{bike.location}</p>
-                <p>{formattedFromDate}</p>
-                <p>{formattedtoDate}</p>
-
+                <div class="Product-details">
                 <div class="d-flex justify-content-between">
-                  <p>${bike.priceperday}/day</p>
-                  <button style={{ float: "right" }}>Book</button>
+                  <h4>Pincode: </h4>  
+                <p>{bike.location}</p>
                 </div>
-              </div>
-            
+                <div class="d-flex justify-content-between">
+                  <h4>Available Till: </h4>
+                <p>{formattedtoDate}</p>
+                </div>
+                </div>
+                <div class="d-flex justify-content-between pt-3">
+                <h3>₹ {bike.priceperday} <p> /day</p></h3>
+                  <button key={`${index}-${bikeIndex}`}
+              onClick={() => handleClickEdit(user, bike)}>Book</button>
+                </div>
+                
+              </div>    
           );
         })
       )
@@ -66,8 +185,11 @@ function SearchedBike() {
 
   return (
     <div class="searched-bike">
-      <Navbar2 />
-      <div class="row bike-list">
+
+      {userData ? <Navbar2 username={userData.username} /> : <Navbar2 />}
+     
+
+      <div class="row bike-list" className={`row bike-list ${showContactUs ? "blur" : ""}`}>
         <div class="col-3">
           <div edit-options>
             <form>
@@ -108,7 +230,7 @@ function SearchedBike() {
                 <div class="input-container">
                   <div class="form-group">
                     <label>Drop Date</label>
-                    <Calendarto />
+                    <Calendarsearch onDateChange={handleDateChange}/>
                   </div>
                 </div>
 
@@ -140,6 +262,132 @@ function SearchedBike() {
           </div>
         </div>
       </div>
+  
+      <div class="inner0" style={{ display: showContactUs ? "block" : "none" }}>
+        <div class="inner">
+          <button className="close-button" onClick={handleCloseContact}>
+            <i class="far fa-window-close"></i>
+          </button>
+
+
+          
+          <div class="image-holder">
+          
+
+            
+            <a href={images[currentImageIndex]} data-fancybox="gallery">
+            {selectedData && <img src={images[currentImageIndex]} alt="Image Gallery"/>}
+            </a>
+
+            <div class="image-buttons">
+          
+          <button onClick={prevImage}>
+            
+            <i className="fas fa-arrow-left"></i>
+          </button>
+          <button onClick={nextImage}>
+            
+            <i className="fas fa-arrow-right"></i>
+          </button>
+        </div>
+           
+          </div>
+          <form action="">
+            <h3>Registration Form</h3>
+            {selectedData && (
+              <>
+                <div className="form-wrapper">
+                  <input
+                    type="text"
+                    placeholder={selectedData.user.username}
+                    className="form-control"
+                    readOnly
+                  />
+                  <i className="fa fa-user" style={{ fontSize: "14px" }}></i>
+                </div>
+                <div class="form-wrapper">
+                  <input
+                    type="text"
+                    placeholder={selectedData.bike.bikenamemodel}
+                    class="form-control"
+                    readOnly
+                  />
+                  <i
+                    class="fas fa-motorcycle"
+                    style={{ "font-size": "14px" }}
+                  ></i>
+                </div>
+                <div class="form-wrapper">
+                  <input
+                    type="text"
+                    placeholder={selectedData.bike.bikenumber}
+                    class="form-control"
+                    readOnly
+                  />
+                  <i
+                    class="fas fa-motorcycle"
+                    style={{ "font-size": "14px" }}
+                  ></i>
+                </div>
+                <div class="form-wrapper">
+                  <input
+                    type="text"
+                    placeholder={
+                      selectedData.bike.willingtodeliver ? "Yes" : "No"
+                    }
+                    class="form-control"
+                    readOnly
+                  />
+                  <i
+                    class="fas fa-envelope"
+                    style={{ "font-size": "14px" }}
+                  ></i>
+                </div>
+                <div class="form-wrapper">
+                  <input
+                    type="text"
+                    placeholder={selectedData.bike.priceperday}
+                    class="form-control"
+                    readOnly
+                  />
+                  <i style={{ "font-size": "14px" }}>₹</i>
+                </div>
+                <div class="form-wrapper">
+                  <input
+                    type="text"
+                    placeholder={selectedData.bike.priceperweek}
+                    class="form-control"
+                    readOnly
+                  />
+                  <i style={{ "font-size": "14px" }}>₹</i>
+                </div>
+                <div class="form-wrapper">
+                  <input
+                    type="text"
+                    placeholder={selectedData.bike.location}
+                    class="form-control"
+                    readOnly
+                  />
+                  <i class="fas fa-map-marker" aria-hidden="true"></i>
+                </div>
+                <div class="form-button">
+                  
+                  <button 
+                  // onClick={() => placeorder (selectedData.bike._id)}
+                  >
+                    <Link to="/api/v1/users/checkout">Place order</Link>
+                    {/* <i class="fas fa-times" style={{ "font-size": "14px" }}></i> */}
+                  </button>
+                </div>
+              </>
+            )}
+          </form>
+        </div>
+      </div>
+    
+
+
+
     </div>
   );
 }

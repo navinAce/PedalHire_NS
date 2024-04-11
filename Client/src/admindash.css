@@ -236,3 +236,14 @@ button:active i {
 .admindash .form-button button {
   margin-left: 2%;
 }
+
+
+.admindash .inner .image-buttons {
+  display: flex;
+  position: absolute;
+  width: 80%;
+  top: 45%;
+  justify-content: space-between;
+  left: 0;
+  margin-left: 0;
+}

@@ -4,14 +4,16 @@
 
 
 .navbar2 .navbar{
-padding-left: 7%;
+    padding-left: 7%;
     padding-right: 7%;
+    position: absolute;
+    top: -90%;
 }
 
 .navbar2 {
     background: #24262b;
     height: 90px;
-    position: absolute;
+    position: relative;
     width: 100%;
     top: 0;
     z-index: 20;

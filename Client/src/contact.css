@@ -79,16 +79,16 @@
   }
   
   button.contact_form_submit {
-      background: #d23b46;
-      border: none;
-      color: #fff;
-      padding: 10px 15px;
-      width: 100%;
-      margin-top: 25px;
-      border-radius: 35px;
-      cursor: pointer;
-      font-size: 14px;
-      letter-spacing: 2px;
+    background: #d23b46;
+    border: none;
+    color: #fff;
+    padding: 10px 15px;
+    width: 100%;
+    margin-top: 25px;
+    border-radius: 10px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-align: center;
   }
   .socil_item_inner li{
       list-style: none;
@@ -120,7 +120,7 @@
 
  .contact .overlay {
     background: black;
-    height: 120vh;
+    height: 100vh;
     width: 100%;
     position: absolute;
     object-fit: cover;

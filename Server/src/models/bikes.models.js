@@ -56,6 +56,10 @@ bikephoto:{
         type:String,
         default: "0"
     },
+    isbooked: {
+        type: Boolean,
+        default: false
+    },
 
 }
 ,{

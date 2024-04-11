@@ -6,8 +6,8 @@
 
   .navbar {
     position: absolute;
-    z-index: 2;
-    top: 2%;
+    z-index: 10;
+    top: -8%;
     width: 90%;
     margin-left: 5%;
     
@@ -174,14 +174,38 @@
     background: #d23b46;
 }
 
+.inverted-submenu {
+    transform: skewX(25deg);
+    transform-origin: right top;
+  }
+  
+  .inverted-submenu li:nth-child(odd) {
+    transform: skewX(-25deg) translateX(0);
+  }
+  
+  .inverted-submenu li:nth-child(odd) > a {
+    transform: skewX(25deg);
+  }
+  
+  .inverted-submenu li:nth-child(even) {
+    transform: skewX(25deg) translateX(0);
+  }
+  
+  .inverted-submenu li:nth-child(even) > a {
+    transform: skewX(-25deg);
+  }
 
+  .navbar .main-logo img{
+    width: 250px;
+  }
+  
 
 
 @media screen and (max-width: 1600px) {
    
     .menu > li > a {
 
-        font-size: 13px;
+        font-size: 14px;
     }
 
     .main-logo {

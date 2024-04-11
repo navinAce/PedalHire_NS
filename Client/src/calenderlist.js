@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Calendarsearch({ id, onDateChange, identifier }) {
+function Calendarto({ id,onChange }) {
   const [maxDate, setMaxDate] = useState(getMaxDate());
   const minDate = getToday(); // Get today's date in the format yyyy-mm-dd
 
@@ -29,12 +29,6 @@ function Calendarsearch({ id, onDateChange, identifier }) {
   }
 
   // Call the onDateChange function and pass the selected date and identifier as arguments
-  function handleDateChange(event) {
-    const selectedDate = event.target.value;
-    if (onDateChange) {
-      onDateChange(selectedDate, identifier);
-    }
-  }
 
   return (
     <input
@@ -44,9 +38,9 @@ function Calendarsearch({ id, onDateChange, identifier }) {
       id={id}
       name={id}
       placeholder="to"
-      onChange={handleDateChange}
+      onChange={onChange}
     />
   );
 }
 
-export { Calendarsearch };
+export { Calendarto };

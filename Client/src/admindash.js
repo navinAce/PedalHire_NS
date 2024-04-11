@@ -1,6 +1,7 @@
 import AdminSidenav from "./adminesidenav";
 import "./admindash.css";
 import React, { useState, useEffect } from "react";
+import './fancyboxconfig'
 
 function AdminDash() {
   const [showContactUs, setShowContactUs] = useState(false);
@@ -248,7 +249,9 @@ function AdminDash() {
             <i class="far fa-window-close"></i>
           </button>
           <div class="image-holder">
-            {selectedData && <img src={images[currentImageIndex]} alt="" />}
+          <a href={images[currentImageIndex]} data-fancybox="gallery">
+            {selectedData && <img src={images[currentImageIndex]} alt="Image Gallery"/>}
+            </a>
             <div class="image-buttons">
               {" "}
               <button onClick={prevImage}>

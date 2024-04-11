@@ -1,5 +1,6 @@
 import "./navbar.css";
-import "./navbar2.css"
+import "./navbar2.css";
+import logo from "./img/logo.png";
 
 
  
@@ -28,7 +29,7 @@ function Navbar2({username}) {
 
 
 
-      <a class="main-logo" href="/">PedalHire</a>
+      <a class="main-logo" href="/"><img src={logo} alt=""/></a>
 
 
 
