@@ -244,6 +244,6 @@ button:active i {
   width: 80%;
   top: 45%;
   justify-content: space-between;
-  left: 0;
-  margin-left: 0;
+  left: -12%;
+    margin-left: 0;
 }

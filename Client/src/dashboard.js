@@ -177,7 +177,7 @@ function Dashboard() {
       const formattedToDate = toDate.toLocaleDateString()
       let status;
       let statusColor;
-      if(rent.rentstatus==="0"){
+      if(rent.rentstatus==="1"){
         status="Lister"
         statusColor = "green"
       }else{

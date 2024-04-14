@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { listARideSchema } from "./schemas/validationlistaride.js";
 import { useNavigate } from "react-router-dom";
 import {Calendarto} from "./calenderlist.js";
-import {Calendarfrom} from "./calenderfrom.js";
+import {Calendarfromlist} from "./calenderfromlist.js";
 const List = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -39,7 +39,7 @@ const List = () => {
         body: data,
       });
       event.target.reset();
-      navigate("/api/v1/users/login");
+      navigate("/");
       const result = await response.json();
       console.log(result);
     } catch (error) {
@@ -199,7 +199,7 @@ const List = () => {
                   <label for="availablefromdate">Availability</label>
                   <label for="drop-location">
                     From{" "}
-                    <Calendarfrom id="availablefromdate" onChange={handleErrors} />{" "}
+                    <Calendarfromlist id="availablefromdate" onChange={handleErrors}/>{" "}
                     {errors.availablefromdate && (
                       <p>{errors.availablefromdate}</p>
                     )}
@@ -207,7 +207,7 @@ const List = () => {
 
                   <label for="availabletodate">
                     To{" "}
-                    <Calendarto id="availabletodate" onChange={handleErrors} />
+                    <Calendarto id="availabletodate" />
                     {errors.availabletodate && <p>{errors.availabletodate}</p>}
                   </label>
                 </div>
@@ -215,7 +215,7 @@ const List = () => {
             </div>
           </div>
           <button type="submit" class="login-btn">
-            Sign up
+            List your bike
           </button>
         </form>
 

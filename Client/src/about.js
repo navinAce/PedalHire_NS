@@ -119,7 +119,7 @@ const About = () => {
 			<div class="col-lg-3 stats">
 			
 				<div class="counting" data-count="32">0</div>
-				<h5>Happy clients</h5>
+				<h5>Happy customers</h5>
 			</div>
 
 			<div class="col-lg-3 stats">

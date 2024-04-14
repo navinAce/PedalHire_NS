@@ -47,10 +47,10 @@ const Login = () =>{
         window.location.href="/api/v1/admin/admindashboard"
       }
       else{
-        window.location.href="/api/v1/users/dashboard"
+        window.location.href="/"
       }
     } catch (error) {
-      console.error("Error during registration:", error);    
+      alert("Invalid credential. Please try again.");    
     }
   };
   

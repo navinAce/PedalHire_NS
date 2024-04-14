@@ -83,6 +83,7 @@
     height: 175px;
     border-radius: 5px;
     object-fit: cover;
+    width: 300px;
   }
   
   .searched-bike .product-list .product h2 {
