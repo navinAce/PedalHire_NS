@@ -15,4 +15,4 @@ Pedalhire is a premier bike renting website that leverages an innovative consume
 - **Backend**: Node.js, Express
 - **Database**: MongoDB
 
-This project was my final year project and received high marks and accolades, showcasing its potential as a reliable solution for bike enthusiasts.
+This project was my final year project and received high marks, showcasing its potential as a reliable solution for bike enthusiasts.
